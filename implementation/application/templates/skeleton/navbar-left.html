@@ -1,0 +1,21 @@
+{% set NavLeftItems = [
+    ('dashnavleft', 'views.dash', 'fas fa-tachometer-alt', 'Dashboard'),
+    ('reportsnavleft', 'views.reports', 'far fa-file-alt', 'Reports'),
+    ('schedulesnavleft', 'views.schedules', 'far fa-file-alt', 'Schedules'),
+    ('utilitiesnavleft', 'views.utilities', 'far fa-file-alt', 'Utilities') ] %}
+
+{% set active_page = active_page|default('dashnavleft') -%}
+<nav class="navbar navbar-dark bg-primary bg-gradient align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" id="MainNav" style="background: var(--bs-red);--bs-body-bg: var(--bs-red);--bs-primary: #f95a15;--bs-primary-rgb: 249,90,21;--bs-secondary: #0578ff;--bs-secondary-rgb: 5,120,255;--bs-success: #04fca3;--bs-success-rgb: 4,252,163;">
+    <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+            <div class="sidebar-brand-text mx-3"><span>CAER</span></div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="navbar-nav text-light" id="accordionSidebar">
+            {% for id, href, ispan, caption in NavLeftItems %}
+            <li class="nav-item"><a {% if id == active_page %}class="nav-link active" {% else %}class="nav-link" {% endif%} id="{{ id }}" href="{{url_for(href)}}"><i class="{{ ispan }}"></i><span>{{ caption }}</span></a></li>
+            {% endfor %}
+        </ul>
+        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+    </div>
+</nav>
